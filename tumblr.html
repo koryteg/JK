@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <!-- DEFAULT VARIABLES -->
+    <meta name="color:Background" content="#3b627e" />
+    
+    <meta name="font:Title" content="Arial" />
+    <meta name="font:Body" content="Arial" />
+    <meta name="font:Accent" content="Lucida Sans" />
+    
+    <meta name="if:Show People I Follow" content="1" />
+    <meta name="if:Show Tags" content="1" />
+    <meta name="if:Show Album Art on Audio Posts" content="1" />
+    <meta name="if:Enable Jump Pagination" content="0" />
+    
+    <meta name="text:Disqus Shortname" content="" />
+    
+    <meta name="image:Header" content="" />
+    <meta name="image:Background" content="" />
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{Title}{block:SearchPage}, {lang:Search results for SearchQuery}{/block:SearchPage}{block:PostSummary}, {PostSummary}{/block:PostSummary}</title>
+    {block:Description}<meta name="description" content="{MetaDescription}" />{/block:Description}
+    <link rel="shortcut icon" href="{Favicon}" />
+    <link rel="apple-touch-icon" href="{PortraitURL-128}"/>
+    <link rel="alternate" type="application/rss+xml" href="{RSS}" />
+    <link href='http://fonts.googleapis.com/css?family=IM+Fell+English+SC|IM+Fell+English' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+    
+        body {
+        	background: {color:Background};
+    		margin: 20px;
+    		padding: 0;
+    		
+    	}
+        #wrapper {
+            width: 960px;
+            margin: 20px 0px;
+        }
+    	#wrapper #left{
+            position: relative;
+    		width: 700px;
+    		float: left;
+            background: url('{image:Background}') top left fixed;
+            background-repeat: no-repeat;
+    	}
+    	#title{
+    		color: #692B28;
+    		background: #272A2B;
+    		width: 700px;
+    		font-size: 61pt;
+    		font-family: 'IM Fell English SC', serif;
+    		margin-right: 10px;
+    		box-shadow: 0px 3px 5px rgba(0,0,0, 0.5);
+    	}
+    	
+        #wrapper #title a {
+    		padding-left: 15px;
+        	color: #692B28;
+            text-decoration: none;
+       }
+    	#wrapper #right{
+    		position: relative;
+    		float: right;
+    		display: inline;
+    		position: fixed;
+    		width: 220px;
+    		margin-left: 20px;
+    	}
+    	#content {
+    		position: relative;
+    		top: 650px;
+    	}
+        .media {
+            margin-bottom: 20px; 
+            padding: 10px 10px;
+            background: #272A2B;
+            box-shadow: 0px 3px 5px rgba(0,0,0, 0.5);
+        }
+        
+        .media img{
+        width: 680px;
+        
+        }
+        
+        #tags{
+        	margin-top: 5px;
+        }
+        
+        #tags a{
+        	margin: 2px;
+        	color: #692B28;
+            text-decoration: none;
+        }
+        #tags span {
+        float: right;
+        
+        }
+        
+        #avatar{
+        	padding: 10px;
+        	background: #272A2B;
+        	margin-bottom: 20px;
+        	box-shadow: 0px 3px 5px rgba(0,0,0, 0.5);
+        }
+        
+    	#description{
+    		color: #692B28;
+        	padding: 10px;
+        	background: #272A2B;
+        	margin-bottom: 20px;
+        	box-shadow: 0px 3px 5px rgba(0,0,0, 0.5);
+        }
+        #nav {
+        	background: #272A2B;
+			color: #692B28;
+            text-decoration: none;
+            padding: 10px;
+            box-shadow: 0px 3px 5px rgba(0,0,0, 0.5);
+        }
+        #nav a {
+        	color: #692B28;
+            text-decoration: none;
+        }
+        .button {
+        	display: inline;
+        }
+        
+    </style>
+    <style type="text/css">{CustomCSS}</style>
+</head>
+
+<body>
+	<div id="wrapper">
+        <div id="left">
+ 	       <div id="title">
+    	        <a href="/">
+        	        {block:IfHeaderImage}<img src="{image:Header}" />{/block:IfHeaderImage}
+            	    {block:IfNotHeaderImage}{Title}{/block:IfNotHeaderImage}
+				</a>
+    	    </div>
+        	<div id="content">
+       		 	{block:Posts}
+        			<div class="media">
+        				{block:Photo}	
+        					{LinkOpenTag}
+        						<img src="{PhotoURL-HighRes}" alt="{PhotoAlt}" />
+       	 					{LinkCloseTag}
+        				{/block:Photo}
+        				<div id="tags">
+        					{block:HasTags} 
+        						{block:Tags}
+        							<a href="{TagURL}">{Tag}</a>
+        						{/block:Tags}
+        					{/block:HasTags}
+        					<span><a href="reblog">Reblog</a>
+        					<a href="">Like</a></span>
+        				</div>
+        			</div>
+        			
+        		{/block:Posts}
+       		</div>
+        </div>
+		<div id="right">
+			<div id="sidebar">
+				<div id="avatar">
+					<a href="/"><img src="http://media.tumblr.com/tumblr_lubdrc84v01r1x3eh.jpg" /></a>
+				</div>
+				<div id="description">
+					{Description}
+				</div>
+				<div id="nav">
+					<div class="button" id="follow">
+						<a href="http://tumblr.com/follow/jamiekingtattoos">Follow</a>
+					</div>
+					<div class="button" id="about">
+						<a href="/about">About</a>
+					</div>
+					<div class="button" id="button-archive">
+						<a href="/archive">{lang:Archive}</a>
+					</div>
+					</br>
+					<div id="search">
+						<form action="/search" method="get">
+						    <input type="text" name="q" value="{SearchQuery}"/>
+   							<input type="submit" value="Search"/>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+</body
+
