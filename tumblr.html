@@ -25,13 +25,48 @@
     <link rel="apple-touch-icon" href="{PortraitURL-128}"/>
     <link rel="alternate" type="application/rss+xml" href="{RSS}" />
     <link href='http://fonts.googleapis.com/css?family=IM+Fell+English+SC|IM+Fell+English' rel='stylesheet' type='text/css'>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type "text/javascript">
+        
+        $(document).ready(function() {
+        var url = window.location.pathname;
+          if (url == ("/") ) {
+            $("#content").addClass("position-down");
+          }
+          else {
+            $("#content").removeClass("position-down").addClass("position-up");
+          }
+          console.log(url);
+        });
+    	$('.tag').children().not(':last-child').append('|');
+
+    </script>
+    
     <style type="text/css">
     
         body {
-        	background: {color:Background};
+            background: {color:Background};
     		margin: 20px;
     		padding: 0;
-    		
+            font-family: Georgia, serif;
+        }
+        p {
+            color:#692B28;    
+            font-size:14pt;
+
+        }
+        h3 {
+            font-size:18pt;
+            text-transform:uppercase;
+        }
+        a {
+            padding: 1px;
+            color: #692B28;
+            text-decoration: none;
+        }
+		a:hover {
+	       	color: #512020;
+	        text-decoration: none;
     	}
         #wrapper {
             width: 960px;
@@ -58,6 +93,12 @@
     		padding-left: 15px;
         	color: #692B28;
             text-decoration: none;
+        }
+        #wrapper #title a:hover {
+        	padding-left: 15px;
+        	color: #512020;
+            background: transparent;
+            text-decoration: none;
        }
     	#wrapper #right{
     		position: relative;
@@ -69,8 +110,13 @@
     	}
     	#content {
     		position: relative;
-    		top: 650px;
     	}
+        .position-down{
+            top: 650px;
+        }
+        .position-up{
+            top: 20px;
+        }
         .media {
             margin-bottom: 20px; 
             padding: 10px 10px;
@@ -82,19 +128,15 @@
         width: 680px;
         
         }
-        
-        #tags{
-        	margin-top: 5px;
-        }
-        
-        #tags a{
-        	margin: 2px;
-        	color: #692B28;
+        ul .tag{
+			color: #692B28;
             text-decoration: none;
+			display: inline;
         }
-        #tags span {
-        float: right;
         
+        .tag li{
+            text-decoration: none;
+			display: inline;
         }
         
         #avatar{
@@ -112,6 +154,7 @@
         	box-shadow: 0px 3px 5px rgba(0,0,0, 0.5);
         }
         #nav {
+			font-size: 14pt;
         	background: #272A2B;
 			color: #692B28;
             text-decoration: none;
@@ -119,13 +162,66 @@
             box-shadow: 0px 3px 5px rgba(0,0,0, 0.5);
         }
         #nav a {
+			padding: 1px;
         	color: #692B28;
             text-decoration: none;
         }
+		 #nav a:hover {
+			-webkit-box-shadow: inset 0px 0px 3px 2px rgba(, , , .3);
+			-moz-box-shadow: inset 0px 0px 3px 2px rgba(, , , .3);
+			box-shadow: inset 0px 0px 3px 2px rgba(, , , .3);
+			-webkit-border-radius: 3px;
+			-moz-border-radius: 3px;
+			border-radius: 3px;
+	       	color: #512020;
+	        text-decoration: none;
+	        }
         .button {
         	display: inline;
         }
-        
+        #search form input {
+            display: inline;   
+        }
+        .search-button {
+          	padding: 1px;
+        	color: #692B28;
+            background: #272A2B;
+            text-decoration: none;
+            border: none;
+            font-size: 14pt;
+            font-family: Georgia, serif;
+            display: inline;
+        }
+        .search-button:hover {
+            -webkit-box-shadow: inset 0px 0px 3px 2px rgba(, , , .3);
+    		-moz-box-shadow: inset 0px 0px 3px 2px rgba(, , , .3);
+			box-shadow: inset 0px 0px 3px 2px rgba(, , , .3);
+			-webkit-border-radius: 3px;
+			-moz-border-radius: 3px;
+			border-radius: 3px;
+	       	color: #512020;
+	        text-decoration: none;
+        }
+		#footer{
+			color: #692B28;
+    		background: #272A2B;
+    		width: 700px;
+			height: 100px;
+    		font-size: 61pt;
+    		font-family: 'IM Fell English SC', serif;
+    		margin-right: 10px;
+			margin-top:700px;
+    		box-shadow: 0px 3px 5px rgba(0,0,0, 0.5);
+		}
+        #next{
+            float: right;
+        }
+        #about{
+            letter-spacing: 3px;
+        }
+        #follow{
+            letter-spacing: 1px;
+        }
     </style>
     <style type="text/css">{CustomCSS}</style>
 </head>
@@ -138,29 +234,56 @@
         	        {block:IfHeaderImage}<img src="{image:Header}" />{/block:IfHeaderImage}
             	    {block:IfNotHeaderImage}{Title}{/block:IfNotHeaderImage}
 				</a>
-    	    </div>
-        	<div id="content">
-       		 	{block:Posts}
-        			<div class="media">
-        				{block:Photo}	
+    	   </div>
+           <div id="content" class="">
+                
+                {block:Posts}
+        			{block:Photo}
+                        <div class="media">	
         					{LinkOpenTag}
         						<img src="{PhotoURL-HighRes}" alt="{PhotoAlt}" />
        	 					{LinkCloseTag}
-        				{/block:Photo}
-        				<div id="tags">
-        					{block:HasTags} 
-        						{block:Tags}
-        							<a href="{TagURL}">{Tag}</a>
-        						{/block:Tags}
-        					{/block:HasTags}
-        					<span><a href="reblog">Reblog</a>
-        					<a href="">Like</a></span>
-        				</div>
-        			</div>
-        			
-        		{/block:Posts}
-       		</div>
-        </div>
+                                </br>
+	                            {block:HasTags}
+	                                <ul class="tag">
+									{block:Tags}
+	                                    <li><a href="{TagURL}">{Tag}</a></li>
+									{/block:Tags}
+									</ul>
+	                            {/block:HasTags}
+                        </div>
+                    {/block:Photo}
+        			{block:Text}
+                        <div class="media">
+                            {block:Title}
+                                <h3><a href="{Permalink}">{Title}</a></h3>
+                            {/block:Title}
+                            {Body}
+                            
+                              </br>
+                            {block:HasTags}
+                                <ul class="tag">
+								{block:Tags}
+                                    <li><a href="{TagURL}">{Tag}</a></li>
+								{/block:Tags}
+								</ul>
+                            {/block:HasTags}
+                        </div>
+                    {/block:Text}
+                    
+                {/block:Posts}
+       	   </div>
+      	   <div id="footer">
+				{block:PreviousPage}
+					<a href="{PreviousPage}">&#171; Prev.</a>
+		       	{/block:PreviousPage}
+		
+	        	{block:NextPage}
+				    <a href="{NextPage}" id="next" >Next &#187;</a>
+		    	{/block:NextPage}
+	
+		   </div>
+		</div>
 		<div id="right">
 			<div id="sidebar">
 				<div id="avatar">
@@ -171,19 +294,21 @@
 				</div>
 				<div id="nav">
 					<div class="button" id="follow">
-						<a href="http://tumblr.com/follow/jamiekingtattoos">Follow</a>
+						<a href="http://tumblr.com/follow/jamiekingtattoos">FOLLOW</a>
 					</div>
+                    </br>
 					<div class="button" id="about">
-						<a href="/about">About</a>
+						<a href="/about">ABOUT</a>
 					</div>
+                    </br>
 					<div class="button" id="button-archive">
-						<a href="/archive">{lang:Archive}</a>
+						<a href="/archive">ARCHIVE</a>
 					</div>
 					</br>
 					<div id="search">
 						<form action="/search" method="get">
 						    <input type="text" name="q" value="{SearchQuery}"/>
-   							<input type="submit" value="Search"/>
+   							<input type="submit" value="Search" class="search-button"/>
 						</form>
 					</div>
 				</div>
