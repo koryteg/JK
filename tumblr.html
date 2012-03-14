@@ -28,6 +28,7 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script type "text/javascript">
         
+        
         $(document).ready(function() {
         var url = window.location.pathname;
           if (url == ("/") ) {
@@ -36,9 +37,10 @@
           else {
             $("#content").removeClass("position-down").addClass("position-up");
           }
+          $(".tag li").not(":last-child").append(" | ");
           console.log(url);
         });
-    	$('.tag').children().not(':last-child').append('|');
+        
 
     </script>
     
@@ -49,6 +51,7 @@
     		margin: 20px;
     		padding: 0;
             font-family: Georgia, serif;
+            color:#692B28;
         }
         p {
             color:#692B28;    
@@ -112,10 +115,10 @@
     		position: relative;
     	}
         .position-down{
-            top: 650px;
+            margin-top: 650px;
         }
         .position-up{
-            top: 20px;
+            margin-top: 20px;
         }
         .media {
             margin-bottom: 20px; 
@@ -137,6 +140,7 @@
         .tag li{
             text-decoration: none;
 			display: inline;
+            color:#692B28;
         }
         
         #avatar{
@@ -210,9 +214,9 @@
     		font-size: 61pt;
     		font-family: 'IM Fell English SC', serif;
     		margin-right: 10px;
-			margin-top:700px;
     		box-shadow: 0px 3px 5px rgba(0,0,0, 0.5);
 		}
+        
         #next{
             float: right;
         }
@@ -251,6 +255,10 @@
 									{/block:Tags}
 									</ul>
 	                            {/block:HasTags}
+							{block:NoteCount} 
+								{NoteCountWithLabel}
+							{/block:NoteCount}
+							
                         </div>
                     {/block:Photo}
         			{block:Text}
